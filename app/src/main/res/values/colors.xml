@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#206c86</color>
+    <color name="colorPrimaryDark">#154758</color>
+    <color name="colorAccent">#206c86</color>
+    <color name="background_color">#009688</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="white_greyish">#EEEEEE</color>
+    <color name="button_selectorcolor">#9E9E9E</color>
+
+    <color name="default_tstamp_color_rcv">#f4f4f6</color>
+    <color name="default_tstamp_color_send">#0a0606</color>
+
+    <color name="default_message_color_rcv">#f6f4f4</color>
+    <color name="default_message_color_send">#131212</color>
+
+    <color name="default_bubble_color_rcv">#302020</color>
+    <color name="default_bubble_color_send">#aaa</color>
+</resources>
