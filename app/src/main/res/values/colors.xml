@@ -3,8 +3,12 @@
     <color name="colorPrimary">#206c86</color>
     <color name="colorPrimaryDark">#154758</color>
     <color name="colorAccent">#206c86</color>
-    <color name="background_color">#009688</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="centerColor">#28859c</color>
+
     <color name="white">#FFFFFF</color>
+    <color name="item_decorator_color">#b9b8b8</color>
     <color name="black">#000000</color>
     <color name="white_greyish">#EEEEEE</color>
     <color name="button_selectorcolor">#9E9E9E</color>
@@ -15,6 +19,7 @@
     <color name="default_message_color_rcv">#f6f4f4</color>
     <color name="default_message_color_send">#131212</color>
 
-    <color name="default_bubble_color_rcv">#302020</color>
-    <color name="default_bubble_color_send">#aaa</color>
+    <color name="default_bubble_color_rcv">#206c86</color>
+    <color name="default_bubble_color_send">#e7e7e7</color>
+    <color name="sendBoxBackground">#e6e5ea</color>
 </resources>
