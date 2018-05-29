@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".acitivites.ChatViewActivity">
 
     <android.support.v7.widget.RecyclerView
@@ -16,33 +17,31 @@
 
     <RelativeLayout
         android:id="@+id/textsend"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="#f6f4f5"
-        android:clickable="true"
-        >
+        android:background="@color/sendBoxBackground"
+        android:clickable="true">
 
         <EditText
             android:id="@+id/textinput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/textSendButton"
-            android:background="#4671a0"
-            android:ems="10"
-            android:imeOptions="flagNoExtractUi|actionSend"
-            android:inputType="textShortMessage|textMultiLine|textCapSentences"
-            android:minHeight="48dp"
-            android:minLines="1"
-            android:maxLines="4"
-            android:paddingLeft="5dp"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
+            android:layout_toLeftOf="@+id/textSendButton"
+            android:ems="10"
+            android:hint="Send Messaage"
+            android:imeOptions="flagNoExtractUi|actionSend"
+            android:inputType="textShortMessage|textMultiLine|textCapSentences"
+            android:maxLines="4"
+            android:minHeight="48dp"
+            android:minLines="1"
 
-            android:textColor="#f4f3f1"
-            android:singleLine="false">
+            android:singleLine="false"
+            android:textColor="#f4f3f1">
 
         </EditText>
 
@@ -51,11 +50,11 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="3dp"
             android:layout_centerVertical="true"
-            android:background="#777"
-            android:src="@drawable/ic_send_white_24dp"
-            android:contentDescription="@string/send_message" />
+            android:layout_marginRight="3dp"
+            android:contentDescription="@string/send_message"
+            android:src="@drawable/ic_send" />
+
     </RelativeLayout>
 
 </RelativeLayout>

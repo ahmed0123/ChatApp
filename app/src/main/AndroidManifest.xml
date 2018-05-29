@@ -12,13 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".acitivites.MainActivity" />
-        <activity android:name=".acitivites.ChatListActivity">
+        <activity android:name=".acitivites.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".acitivites.MainActivity">
+
+        </activity>
+        <activity android:name=".acitivites.ChatListActivity">
+
         </activity>
         <activity
             android:name=".acitivites.ChatViewActivity"
@@ -32,9 +37,8 @@
 
         <activity
             android:name=".acitivites.MeActivity"
-            android:parentActivityName=".acitivites.ChatListActivity">
+            android:parentActivityName=".acitivites.ChatListActivity"></activity>
 
-        </activity>
     </application>
 
 </manifest>

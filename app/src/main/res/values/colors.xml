@@ -7,10 +7,10 @@
     <color name="navigationBarColor">#000000</color>
     <color name="centerColor">#28859c</color>
 
-    <color name="white">#FFFFFF</color>
     <color name="item_decorator_color">#b9b8b8</color>
     <color name="black">#000000</color>
-    <color name="white_greyish">#EEEEEE</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#d2d0d0</color>
     <color name="button_selectorcolor">#9E9E9E</color>
 
     <color name="default_tstamp_color_rcv">#f4f4f6</color>

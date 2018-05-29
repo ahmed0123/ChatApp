@@ -22,10 +22,12 @@ import org.jivesoftware.smack.chat2.IncomingChatMessageListener;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
+import org.jivesoftware.smackx.iqregister.AccountManager;
 import org.jivesoftware.smackx.ping.PingManager;
 import org.jivesoftware.smackx.ping.android.ServerPingWithAlarmManager;
 import org.jxmpp.jid.EntityBareJid;
 import org.jxmpp.jid.impl.JidCreate;
+import org.jxmpp.jid.parts.Localpart;
 import org.jxmpp.stringprep.XmppStringprepException;
 
 import java.io.IOException;
@@ -35,9 +37,7 @@ public class RoosterConnection implements ConnectionListener {
     private static final String LOGTAG = "RoosterConnection";
 
     private final Context mApplicationContext;
-    private String mUsername;
-    private String mPassword;
-    private String mServiceName;
+    private String mUsername, mPassword, mServiceName;
     private XMPPTCPConnection mConnection;
     private ConnectionState mConnectionState;
     private PingManager pingManager;
@@ -71,8 +71,8 @@ public class RoosterConnection implements ConnectionListener {
         }
 
     }
-    private void updateActivitiesOfConnectionStateChange( ConnectionState mConnectionState)
-    {
+
+    private void updateActivitiesOfConnectionStateChange(ConnectionState mConnectionState) {
         ConnectionState connectionState = mConnectionState;
         String status;
         switch ( mConnectionState)
@@ -192,8 +192,7 @@ public class RoosterConnection implements ConnectionListener {
         }
     }
 
-    public void sendMessage ( String body ,String toJid)
-    {
+    public void sendMessage(String body, String toJid) {
         Log.d(LOGTAG,"Sending message to :"+ toJid);
 
         EntityBareJid jid = null;

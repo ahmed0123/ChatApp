@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,6 +20,7 @@ import com.example.hendawy.chatapp.R;
 import com.example.hendawy.chatapp.Xmpp.RoosterConnectionService;
 import com.example.hendawy.chatapp.adapter.ChatListAdapter;
 import com.example.hendawy.chatapp.utils.Utilities;
+import com.example.hendawy.chatapp.views.DividerDecoration;
 
 public class ChatListActivity extends AppCompatActivity implements ChatListAdapter.OnItemClickListener {
 
@@ -54,7 +58,12 @@ public class ChatListActivity extends AppCompatActivity implements ChatListAdapt
         }
 
         chatsRecyclerView = (RecyclerView) findViewById(R.id.chatsRecyclerView);
-        chatsRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        chatsRecyclerView.setLayoutManager(linearLayoutManager);
+
+        chatsRecyclerView.setHasFixedSize(true);
+        chatsRecyclerView.addItemDecoration(new DividerDecoration(this.getResources().getDrawable(R.drawable.chat_list_item_decorator)));
+        chatsRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         ChatListAdapter mAdapter = new ChatListAdapter(getApplicationContext());
         mAdapter.setmOnItemClickListener(this);

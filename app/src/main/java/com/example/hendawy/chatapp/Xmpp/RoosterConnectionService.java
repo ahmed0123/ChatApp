@@ -46,6 +46,7 @@ public class RoosterConnectionService extends Service {
     private void initConnection()
     {
         Log.d(LOGTAG,"initConnection()");
+
         if( mConnection == null)
         {
             mConnection = new RoosterConnection(this);
@@ -53,7 +54,7 @@ public class RoosterConnectionService extends Service {
 
         try {
             mConnection.connect();
-        } catch (IOException |XMPPException |SmackException e) {
+        } catch (IOException | XMPPException | SmackException e) {
 
             Log.d(LOGTAG,e.getMessage());
 

@@ -4,7 +4,11 @@
     <dimen name="activity_vertical_margin">5dp</dimen>
     <dimen name="chat_right_margin">10dp</dimen>
     <dimen name="default_message_text_size">14sp</dimen>
-    <dimen name="default_message_chat_text_size">20sp</dimen>
+    <dimen name="default_message_chat_text_size">17sp</dimen>
     <dimen name="default_timestamp_text_size">10sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="tab_max_width">264dp</dimen>
+    <dimen name="tab_padding_bottom">16dp</dimen>
+    <dimen name="tab_label">14sp</dimen>
+    <dimen name="custom_tab_layout_height">72dp</dimen>
 </resources>
