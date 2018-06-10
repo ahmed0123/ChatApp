@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.example.hendawy.chatapp.R;
 import com.example.hendawy.chatapp.Xmpp.RoosterConnectionService;
 import com.example.hendawy.chatapp.acitivites.ChatListActivity;
+import com.example.hendawy.chatapp.acitivites.HomeActivity;
 import com.example.hendawy.chatapp.utils.Constants;
 import com.example.hendawy.chatapp.views.CustomToast;
 
@@ -71,7 +72,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 {
                     case Constants.BroadCastMessages.UI_AUTHENTICATED:
 
-                        Intent i = new Intent(getActivity(),ChatListActivity.class);
+                        Intent i = new Intent(getActivity(), HomeActivity.class);
                         startActivity(i);
                         getActivity().finish();
                         break;
