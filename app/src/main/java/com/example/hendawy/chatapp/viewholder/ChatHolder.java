@@ -2,6 +2,7 @@ package com.example.hendawy.chatapp.viewholder;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -9,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hendawy.chatapp.R;
+import com.example.hendawy.chatapp.Xmpp.RoosterConnection;
+import com.example.hendawy.chatapp.Xmpp.RoosterConnectionService;
 import com.example.hendawy.chatapp.adapter.ChatListAdapter;
 import com.example.hendawy.chatapp.model.Chat;
+import com.example.hendawy.chatapp.utils.Utilities;
 
 public class ChatHolder extends RecyclerView.ViewHolder {
 
@@ -23,7 +27,7 @@ public class ChatHolder extends RecyclerView.ViewHolder {
     private ChatListAdapter mChatListAdapter;
 
 
-    public ChatHolder(View itemView, ChatListAdapter adapter) {
+    public ChatHolder(final View itemView, ChatListAdapter adapter) {
         super(itemView);
 
         contactTextView = (TextView) itemView.findViewById(R.id.contact_jid);
@@ -39,7 +43,7 @@ public class ChatHolder extends RecyclerView.ViewHolder {
                 ChatListAdapter.OnItemClickListener listener = mChatListAdapter.getmOnItemClickListener();
 
                 if (listener != null) {
-                    listener.onItemClick(contactTextView.getText().toString());
+                    listener.onItemClick(contactTextView.getText().toString(), mChat.getContactType());
 
                 }
 
@@ -47,13 +51,37 @@ public class ChatHolder extends RecyclerView.ViewHolder {
 
             }
         });
+
+        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ChatListAdapter.OnItemLongClickListener listener = mChatListAdapter.getOnItemLongClickListener();
+                if (listener != null) {
+                    listener.onItemLongClick(mChat.getJid(), mChat.getPersistID(), itemView);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     public void bindChat(Chat chat) {
+        mChat = chat;
         contactTextView.setText(chat.getJid());
         messageAbstractTextView.setText(chat.getLastMessage());
-        profileImage.setImageResource(R.drawable.image);
-        timestampTextView.setText("12:00 AM");
+        timestampTextView.setText(Utilities.getFormattedTime(mChat.getLastMessageTimeStamp()));
+
+        profileImage.setImageResource(R.drawable.ic_profile);
+
+        RoosterConnection rc = RoosterConnectionService.getConnection();
+        if (rc != null) {
+            String imageAbsPath = rc.getProfileImageAbsolutePath(mChat.getJid());
+            if (imageAbsPath != null) {
+                Drawable d = Drawable.createFromPath(imageAbsPath);
+                profileImage.setImageDrawable(d);
+            }
+        }
     }
+
 
 }

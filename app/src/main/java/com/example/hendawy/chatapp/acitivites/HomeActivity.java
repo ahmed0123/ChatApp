@@ -60,8 +60,6 @@ public class HomeActivity extends AppCompatActivity {
                 Intent i = new Intent(HomeActivity.this, MeActivity.class);
                 startActivity(i);
                 break;
-            case R.id.action_settings:
-                return true;
         }
 
         return super.onOptionsItemSelected(item);

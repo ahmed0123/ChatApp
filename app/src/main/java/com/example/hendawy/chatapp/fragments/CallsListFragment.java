@@ -18,15 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hendawy.chatapp.R;
-import com.example.hendawy.chatapp.Xmpp.RoosterConnectionService;
-import com.example.hendawy.chatapp.acitivites.ChatListActivity;
-import com.example.hendawy.chatapp.acitivites.ChatViewActivity;
-import com.example.hendawy.chatapp.acitivites.ContactListActivity;
-import com.example.hendawy.chatapp.acitivites.MainActivity;
-import com.example.hendawy.chatapp.acitivites.MeActivity;
-import com.example.hendawy.chatapp.adapter.ChatListAdapter;
-import com.example.hendawy.chatapp.utils.Utilities;
-import com.example.hendawy.chatapp.views.DividerDecoration;
 
 /**
  * A simple {@link Fragment} subclass.

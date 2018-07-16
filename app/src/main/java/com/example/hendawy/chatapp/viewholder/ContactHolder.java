@@ -1,5 +1,6 @@
 package com.example.hendawy.chatapp.viewholder;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -7,11 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hendawy.chatapp.R;
+import com.example.hendawy.chatapp.Xmpp.RoosterConnection;
+import com.example.hendawy.chatapp.Xmpp.RoosterConnectionService;
 import com.example.hendawy.chatapp.adapter.ContactListAdapter;
 import com.example.hendawy.chatapp.model.Contact;
 
 public class ContactHolder extends RecyclerView.ViewHolder {
-
     private TextView jidTexView;
     private TextView subscriptionTypeTextView;
     private Contact mContact;
@@ -19,7 +21,7 @@ public class ContactHolder extends RecyclerView.ViewHolder {
     private ContactListAdapter mAdapter;
     private static final String LOGTAG = "ContactHolder";
 
-    public ContactHolder(View itemView , ContactListAdapter adapter) {
+    public ContactHolder(final View itemView, ContactListAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
         jidTexView = (TextView) itemView.findViewById(R.id.contact_jid_string);
@@ -39,6 +41,19 @@ public class ContactHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
+
+
+        itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ContactListAdapter.OnItemLongClickListener listener = mAdapter.getmOnItemLongClickListener();
+                if (listener != null) {
+                    mAdapter.getmOnItemLongClickListener().onItemLongClick(mContact.getPersistID(), mContact.getJid(), itemView);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
 
@@ -50,8 +65,17 @@ public class ContactHolder extends RecyclerView.ViewHolder {
             return;
         }
         jidTexView.setText(mContact.getJid());
-        subscriptionTypeTextView.setText("NONE_NONE");
+        subscriptionTypeTextView.setText(mContact.getTypeStringValue(mContact.getSubscriptionType()));
         profile_image.setImageResource(R.drawable.ic_profile);
+
+        RoosterConnection rc = RoosterConnectionService.getConnection();
+        if (rc != null) {
+            String imageAbsPath = rc.getProfileImageAbsolutePath(mContact.getJid());
+            if (imageAbsPath != null) {
+                Drawable d = Drawable.createFromPath(imageAbsPath);
+                profile_image.setImageDrawable(d);
+            }
+        }
 
     }
 }

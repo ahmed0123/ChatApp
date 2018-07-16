@@ -1,8 +1,10 @@
 package com.example.hendawy.chatapp.model;
 
+import android.content.ContentValues;
 import android.text.format.DateFormat;
 
 import java.util.concurrent.TimeUnit;
+
 
 
 
@@ -11,6 +13,12 @@ public class ChatMessage {
     private long timestamp;
     private Type type;
     private String contactJid;
+    public static final String TABLE_NAME = "chatMessages";
+    private int persistID;
+
+    public int getPersistID() {
+        return persistID;
+    }
 
 
     public ChatMessage(String message, long timestamp, Type type , String contactJid){
@@ -53,22 +61,39 @@ public class ChatMessage {
         this.contactJid = contactJid;
     }
 
-    public String getFormattedTime(){
-
-        long oneDayInMillis = TimeUnit.DAYS.toMillis(1); // 24 * 60 * 60 * 1000;
-
-        long timeDifference = System.currentTimeMillis() - timestamp;
-
-        return timeDifference < oneDayInMillis
-                ? DateFormat.format("hh:mm a", timestamp).toString()
-                : DateFormat.format("dd MMM - hh:mm a", timestamp).toString();
+    public void setPersistID(int persistID) {
+        this.persistID = persistID;
     }
 
+    public String getTypeStringValue(Type type) {
+        if (type == Type.SENT)
+            return "SENT";
+        else
+            return "RECEIVED";
+    }
 
+    public ContentValues getContentValues() {
+        ContentValues values = new ContentValues();
+        values.put(Cols.MESSAGE, message);
+        values.put(Cols.TIMESTAMP, timestamp);
+        values.put(Cols.MESSAGE_TYPE, getTypeStringValue(type));
+        values.put(Cols.CONTACT_JID, contactJid);
+
+        return values;
+
+    }
+
+    public static final class Cols {
+        public static final String CHAT_MESSAGE_UNIQUE_ID = "chatMessageUniqueId";
+        public static final String MESSAGE = "message";
+        public static final String TIMESTAMP = "timestamp";
+        public static final String MESSAGE_TYPE = "messageType";
+        public static final String CONTACT_JID = "contactjid";
+    }
 
     public enum  Type {
         SENT,RECEIVED
     }
 
-
 }
+

@@ -1,31 +1,67 @@
 package com.example.hendawy.chatapp.model;
 
 
+import android.content.ContentValues;
 
 public class Contact {
     private String jid;
     private SubscriptionType subscriptionType;
-
-
-    public enum SubscriptionType{
-        //Subscription type should catter for the from and to channels. We should simultaneously know the FROM and TO subscription information
-        //FROM  - TO
-        NONE_NONE,//No presence subscription
-        NONE_PENDING,
-        NONE_TO,
-
-        PENDING_NONE,
-        PENDING_PENDING,
-        PENDING_TO,
-
-        FROM_NONE,
-        FROM_PENDING,
-        FROM_TO
-    }
+    public static final String TABLE_NAME = "contacts";//For use in persistance
+    boolean pendingTo;
+    boolean pendingFrom;
+    boolean onlineStatus;
+    private String profileImagePath;
+    private int persistID;
 
     public Contact(String jid, SubscriptionType subscriptionType) {
         this.jid = jid;
         this.subscriptionType = subscriptionType;
+        this.profileImagePath = "NONE";
+
+        this.pendingFrom = false;
+        this.pendingTo = false;
+        this.onlineStatus = false;
+    }
+
+    public ContentValues getContentValues() {
+        ContentValues values = new ContentValues();
+        //CONTACT_UNIQUE_ID is auto-filled
+        //Sqlite doesn't have a boolean data type. We turn boolean into integers before db write
+        int pendingFromInt = (pendingFrom) ? 1 : 0;
+        int pendingToInt = (pendingTo) ? 1 : 0;
+        int onlineStatusInt = (onlineStatus) ? 1 : 0;
+
+        values.put(Cols.CONTACT_JID, jid);
+        values.put(Cols.SUBSCRIPTION_TYPE, getTypeStringValue(subscriptionType));
+        values.put(Cols.PROFILE_IMAGE_PATH, profileImagePath);
+
+        values.put(Cols.PENDING_STATUS_FROM, pendingFromInt);
+        values.put(Cols.PENDING_STATUS_TO, pendingToInt);
+        values.put(Cols.ONLINE_STATUS, onlineStatusInt);
+
+        return values;
+
+    }
+
+    public String getTypeStringValue(SubscriptionType type) {
+        if (type == SubscriptionType.FROM)
+            return "FROM";
+        else if (type == SubscriptionType.TO)
+            return "TO";
+        else if (type == SubscriptionType.BOTH)
+            return "BOTH";
+        else if (type == SubscriptionType.NONE)
+            return "NONE";
+        else
+            return "INDETERMINATE";
+    }
+
+    public String getProfileImagePath() {
+        return profileImagePath;
+    }
+
+    public void setProfileImagePath(String profileImagePath) {
+        this.profileImagePath = profileImagePath;
     }
 
     public String getJid() {
@@ -42,5 +78,52 @@ public class Contact {
 
     public void setSubscriptionType(SubscriptionType subscriptionType) {
         this.subscriptionType = subscriptionType;
+    }
+
+    public int getPersistID() {
+        return persistID;
+    }
+
+    public void setPersistID(int persistID) {
+        this.persistID = persistID;
+    }
+
+    public boolean isPendingTo() {
+        return pendingTo;
+    }
+
+    public void setPendingTo(boolean pendingTo) {
+        this.pendingTo = pendingTo;
+    }
+
+    public boolean isPendingFrom() {
+        return pendingFrom;
+    }
+
+    public void setPendingFrom(boolean pendingFrom) {
+        this.pendingFrom = pendingFrom;
+    }
+
+    public boolean isOnlineStatus() {
+        return onlineStatus;
+    }
+
+    public void setOnlineStatus(boolean onlineStatus) {
+        this.onlineStatus = onlineStatus;
+    }
+
+    public enum SubscriptionType {
+        NONE, FROM, TO, BOTH
+    }
+
+    public static final class Cols {
+        public static final String CONTACT_UNIQUE_ID = "contactUniqueId";
+        public static final String CONTACT_JID = "jid";
+        public static final String SUBSCRIPTION_TYPE = "subscriptionType";
+        public static final String PROFILE_IMAGE_PATH = "profileImagePath";
+
+        public static final String PENDING_STATUS_TO = "pendingTo";
+        public static final String PENDING_STATUS_FROM = "pendingFrom";
+        public static final String ONLINE_STATUS = "onlineStatus";
     }
 }
