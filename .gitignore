@@ -6,6 +6,7 @@
 /.idea/workspace.xml
 .DS_Store
 /.idea
+/caches
 /build
 /captures
 .externalNativeBuild
